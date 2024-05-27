@@ -1,4 +1,4 @@
-package es.marcrdz.mondlyapp
+package es.marcrdz.ui
 
 import org.junit.Test
 
