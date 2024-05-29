@@ -11,7 +11,7 @@ annotation class ClearItemsUseCase
 
 class ClearItemsUc @Inject constructor(
     private val repository: DomainContract.ItemsRepository
-): UseCase<Any, Boolean> {
+): UseCase<@JvmSuppressWildcards Any, @JvmSuppressWildcards Boolean> {
 
     override suspend fun invoke(param: Any?): Either<Fail, Boolean> =
         repository.clearItems()

@@ -1,7 +1,7 @@
 package es.marcrdz.datasource.services
 
 import arrow.core.Either
-import es.marcrdz.data.models.ItemsResponseDto
+import es.marcrdz.datasource.models.ItemsResponseDto
 import es.marcrdz.datasource.client.ClientConfig
 import es.marcrdz.datasource.client.EitherCallAdapterFactory
 import es.marcrdz.domain.models.Fail
@@ -13,7 +13,7 @@ import retrofit2.http.GET
 
 interface ItemsService {
 
-    @GET("/v1/public/characters")
+    @GET("/mondly_android_code_task_json")
     suspend fun getItems(): Either<Fail, ItemsResponseDto>
 
 }

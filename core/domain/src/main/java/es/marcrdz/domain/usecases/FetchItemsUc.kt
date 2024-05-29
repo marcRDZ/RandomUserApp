@@ -12,7 +12,7 @@ annotation class FetchItemsUseCase
 
 class FetchItemsUc @Inject constructor(
     private val repository: DomainContract.ItemsRepository
-): UseCase<Any, List<Item>> {
+): UseCase<@JvmSuppressWildcards Any, @JvmSuppressWildcards List<Item>> {
 
     override suspend fun invoke(param: Any?): Either<Fail, List<Item>> =
         repository.fetchItems()

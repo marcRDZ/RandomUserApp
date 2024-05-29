@@ -6,8 +6,11 @@ import arrow.core.right
 import es.marcrdz.data.DataContract
 import es.marcrdz.domain.models.Fail
 import es.marcrdz.domain.models.Item
+import javax.inject.Inject
+import javax.inject.Singleton
 
-object ItemsCacheDataSource: DataContract.ItemDataSource.Cache {
+@Singleton
+class ItemsCacheDataSource @Inject constructor(): DataContract.ItemDataSource.Cache {
 
     private var itemsCache: List<Item>? = null
 

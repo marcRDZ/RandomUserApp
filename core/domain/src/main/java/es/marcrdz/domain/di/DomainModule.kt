@@ -4,7 +4,6 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import es.marcrdz.domain.models.Fail
 import es.marcrdz.domain.models.Item
 import es.marcrdz.domain.usecases.ClearItemsUc
 import es.marcrdz.domain.usecases.ClearItemsUseCase
@@ -18,10 +17,10 @@ abstract class DomainModule {
 
     @FetchItemsUseCase
     @Binds
-    abstract fun bindsFetchItemsUseCase(useCase: FetchItemsUc): UseCase<Fail, List<Item>>
+    abstract fun bindsFetchItemsUseCase(useCase: FetchItemsUc): UseCase<Nothing, List<Item>>
 
     @ClearItemsUseCase
     @Binds
-    abstract fun bindsClearItemsUseCase(useCase: ClearItemsUc): UseCase<Fail, Boolean>
+    abstract fun bindsClearItemsUseCase(useCase: ClearItemsUc): UseCase<Nothing, Boolean>
 
 }
