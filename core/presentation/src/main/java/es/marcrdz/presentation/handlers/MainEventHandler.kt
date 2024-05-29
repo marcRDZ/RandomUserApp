@@ -11,7 +11,11 @@ import es.marcrdz.presentation.models.Event
 import es.marcrdz.presentation.models.FailState
 import es.marcrdz.presentation.models.ScreenState
 import es.marcrdz.presentation.models.UIState
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -23,15 +27,17 @@ class MainEventHandlerImpl @Inject constructor(
 
     override suspend fun handleInit(): Flow<UIState<MainData>> = fetchItems()
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun handleEvent(event: MainEvent): Flow<UIState<MainData>> =
         when (event) {
-            MainEvent.SwipeToRefresh -> flow {
+
+            MainEvent.RefreshOnSwipe -> flow {
                 emit(BackgroundState.Loading)
-                clearItemsUc().let {
-                    emit(BackgroundState.Idle)
-                    fetchItems()
-                }
-            }
+                clearItemsUc()
+                emit(BackgroundState.Idle)
+            }.flatMapLatest { fetchItems() }
+
+            MainEvent.RetryOnError -> fetchItems()
         }
 
     private fun fetchItems(): Flow<UIState<MainData>> = flow {
@@ -50,7 +56,8 @@ class MainEventHandlerImpl @Inject constructor(
 }
 
 sealed class MainEvent : Event {
-    data object SwipeToRefresh : MainEvent()
+    data object RefreshOnSwipe : MainEvent()
+    data object RetryOnError : MainEvent()
 }
 
 data class MainData(
