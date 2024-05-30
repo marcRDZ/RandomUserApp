@@ -1,6 +1,7 @@
 package es.marcrdz.data.repositories
 
 import arrow.core.Either
+import arrow.core.flatMap
 import arrow.core.right
 import es.marcrdz.data.DataContract
 import es.marcrdz.domain.DomainContract
@@ -11,13 +12,18 @@ import javax.inject.Inject
 class ItemsRepository @Inject constructor(
     private val remoteDataSource: DataContract.ItemDataSource.Remote,
     private val cacheDataSource: DataContract.ItemDataSource.Cache
-): DomainContract.ItemsRepository {
+) : DomainContract.ItemsRepository {
 
     override suspend fun fetchItems(): Either<Fail, List<Item>> =
-        cacheDataSource.getItems().fold({ remoteDataSource.loadItems() }) { items ->
-            cacheDataSource.saveItems(items)
-            items.right()
-        }
+        cacheDataSource.getItems().fold(
+            ifLeft = {
+                remoteDataSource.loadItems().map { items ->
+                    cacheDataSource.saveItems(items)
+                    items
+                }
+            },
+            ifRight = { it.right() }
+        )
 
     override suspend fun clearItems(): Either<Fail, Boolean> =
         cacheDataSource.clearItems()

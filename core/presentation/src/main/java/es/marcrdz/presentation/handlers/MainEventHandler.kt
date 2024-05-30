@@ -14,6 +14,7 @@ import es.marcrdz.presentation.models.UIState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
@@ -34,8 +35,16 @@ class MainEventHandlerImpl @Inject constructor(
             MainEvent.RefreshOnSwipe -> flow {
                 emit(BackgroundState.Loading)
                 clearItemsUc()
-                emit(BackgroundState.Idle)
-            }.flatMapLatest { fetchItems() }
+                fetchItemsUc().let {
+                    emit(BackgroundState.Idle)
+                    emit(
+                        it.fold(
+                            ifLeft = { fail -> FailState(fail) },
+                            ifRight = { items -> ScreenState(MainData(items)) }
+                        )
+                    )
+                }
+            }
 
             MainEvent.RetryOnError -> fetchItems()
         }
