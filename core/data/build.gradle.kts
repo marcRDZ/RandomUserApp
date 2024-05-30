@@ -16,4 +16,9 @@ dependencies {
     ksp(libs.hilt.compiler)
 
     implementation(libs.arrow.core)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlin.coroutines.test)
+    
 }

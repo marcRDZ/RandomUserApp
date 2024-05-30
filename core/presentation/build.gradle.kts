@@ -17,4 +17,10 @@ dependencies {
 
     implementation(libs.arrow.core)
     implementation(libs.kotlin.coroutines.core)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.turbine)
+    testImplementation(libs.kotlin.coroutines.test)
+
 }
