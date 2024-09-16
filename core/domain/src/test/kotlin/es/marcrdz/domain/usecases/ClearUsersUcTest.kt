@@ -11,13 +11,13 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
-class ClearItemsUcTest {
+class ClearUsersUcTest {
 
     @MockK
-    lateinit var repository: DomainContract.ItemsRepository
+    lateinit var repository: DomainContract.UsersRepository
 
-    private val clearItemsUc: UseCase<Nothing, Boolean> by lazy {
-        ClearItemsUc(repository)
+    private val clearUsersUc: UseCase<Nothing, Boolean> by lazy {
+        ClearUsersUc(repository)
     }
 
     @Before
@@ -26,12 +26,12 @@ class ClearItemsUcTest {
     @Test
     fun `When clearItemsUc is executed returns data`() = runTest {
         //given
-        coEvery { repository.clearItems() } returns Either.right(true)
+        coEvery { repository.clearUsers() } returns Either.right(true)
         //when
-        val result = clearItemsUc()
+        val result = clearUsersUc()
         //then
         assertTrue(result.isRight())
-        coVerify { repository.clearItems() }
+        coVerify { repository.clearUsers() }
     }
 
 }

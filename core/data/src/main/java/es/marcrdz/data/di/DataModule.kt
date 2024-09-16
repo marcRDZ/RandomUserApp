@@ -4,7 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import es.marcrdz.data.repositories.ItemsRepository
+import es.marcrdz.data.repositories.UsersRepository
 import es.marcrdz.domain.DomainContract
 
 @Module
@@ -12,6 +12,6 @@ import es.marcrdz.domain.DomainContract
 abstract class DataModule {
 
     @Binds
-    abstract fun bindsItemRepository(repository: ItemsRepository): DomainContract.ItemsRepository
+    abstract fun bindsUserRepository(repository: UsersRepository): DomainContract.UsersRepository
 
 }

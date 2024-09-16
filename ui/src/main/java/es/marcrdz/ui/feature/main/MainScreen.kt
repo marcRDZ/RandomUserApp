@@ -13,8 +13,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import es.marcrdz.presentation.handlers.MainEvent
 import es.marcrdz.presentation.models.BackgroundState
-import es.marcrdz.ui.composables.ItemsView
-import es.marcrdz.ui.composables.MondlyScaffold
+import es.marcrdz.ui.composables.UsersView
+import es.marcrdz.ui.composables.UsersScaffold
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -23,7 +23,7 @@ fun MainScreen(
     modifier: Modifier
 ) {
 
-    MondlyScaffold(
+    UsersScaffold(
         backgroundState = viewModel.backgroundState.value,
         failState = viewModel.failState.value,
         modifier = modifier,
@@ -31,10 +31,10 @@ fun MainScreen(
     ) { padding ->
 
         viewModel.screenState.value.takeIf {
-            it.items.isNotEmpty()
+            it.users.isNotEmpty()
         }?.let {
-            ItemsView(
-                itemsList = it.items,
+            UsersView(
+                usersList = it.users,
                 isRefreshing = viewModel.backgroundState.value is BackgroundState.Loading,
                 onRefresh = { viewModel.onEvent(MainEvent.RefreshOnSwipe) },
                 modifier = Modifier.padding(padding)

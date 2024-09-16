@@ -19,7 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MondlyApp"
+rootProject.name = "RandomUserApp"
 include(":app")
 include(":core:domain")
 include(":core:data")

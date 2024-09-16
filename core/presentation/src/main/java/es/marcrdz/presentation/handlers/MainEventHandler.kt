@@ -1,8 +1,8 @@
 package es.marcrdz.presentation.handlers
 
-import es.marcrdz.domain.models.Item
-import es.marcrdz.domain.usecases.ClearItemsUseCase
-import es.marcrdz.domain.usecases.FetchItemsUseCase
+import es.marcrdz.domain.models.User
+import es.marcrdz.domain.usecases.ClearUsersUseCase
+import es.marcrdz.domain.usecases.FetchUsersUseCase
 import es.marcrdz.domain.usecases.UseCase
 import es.marcrdz.presentation.PresentationContract
 import es.marcrdz.presentation.models.BackgroundState
@@ -11,24 +11,18 @@ import es.marcrdz.presentation.models.Event
 import es.marcrdz.presentation.models.FailState
 import es.marcrdz.presentation.models.ScreenState
 import es.marcrdz.presentation.models.UIState
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flatMapConcat
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 interface MainEventHandler : PresentationContract.EventFlowHandler<MainEvent, MainData>
 class MainEventHandlerImpl @Inject constructor(
-    @FetchItemsUseCase private val fetchItemsUc: UseCase<@JvmSuppressWildcards Nothing, @JvmSuppressWildcards List<Item>>,
-    @ClearItemsUseCase private val clearItemsUc: UseCase<@JvmSuppressWildcards Nothing, @JvmSuppressWildcards Boolean>
+    @FetchUsersUseCase private val fetchItemsUc: UseCase<@JvmSuppressWildcards Nothing, @JvmSuppressWildcards List<User>>,
+    @ClearUsersUseCase private val clearItemsUc: UseCase<@JvmSuppressWildcards Nothing, @JvmSuppressWildcards Boolean>
 ) : MainEventHandler {
 
-    override suspend fun handleInit(): Flow<UIState<MainData>> = fetchItems()
+    override suspend fun handleInit(): Flow<UIState<MainData>> = fetchUsers()
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun handleEvent(event: MainEvent): Flow<UIState<MainData>> =
         when (event) {
 
@@ -46,10 +40,10 @@ class MainEventHandlerImpl @Inject constructor(
                 }
             }
 
-            MainEvent.RetryOnError -> fetchItems()
+            MainEvent.RetryOnError -> fetchUsers()
         }
 
-    private fun fetchItems(): Flow<UIState<MainData>> = flow {
+    private fun fetchUsers(): Flow<UIState<MainData>> = flow {
         emit(BackgroundState.Loading)
         fetchItemsUc().let {
             emit(BackgroundState.Idle)
@@ -70,5 +64,5 @@ sealed class MainEvent : Event {
 }
 
 data class MainData(
-    val items: List<Item>
+    val users: List<User>
 ) : Data

@@ -4,23 +4,23 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import es.marcrdz.domain.models.Item
-import es.marcrdz.domain.usecases.ClearItemsUc
-import es.marcrdz.domain.usecases.ClearItemsUseCase
-import es.marcrdz.domain.usecases.FetchItemsUc
-import es.marcrdz.domain.usecases.FetchItemsUseCase
+import es.marcrdz.domain.models.User
+import es.marcrdz.domain.usecases.ClearUsersUc
+import es.marcrdz.domain.usecases.ClearUsersUseCase
+import es.marcrdz.domain.usecases.FetchUsersUc
+import es.marcrdz.domain.usecases.FetchUsersUseCase
 import es.marcrdz.domain.usecases.UseCase
 
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class DomainModule {
 
-    @FetchItemsUseCase
+    @FetchUsersUseCase
     @Binds
-    abstract fun bindsFetchItemsUseCase(useCase: FetchItemsUc): UseCase<Nothing, List<Item>>
+    abstract fun bindsFetchUsersUseCase(useCase: FetchUsersUc): UseCase<Nothing, List<User>>
 
-    @ClearItemsUseCase
+    @ClearUsersUseCase
     @Binds
-    abstract fun bindsClearItemsUseCase(useCase: ClearItemsUc): UseCase<Nothing, Boolean>
+    abstract fun bindsClearUsersUseCase(useCase: ClearUsersUc): UseCase<Nothing, Boolean>
 
 }

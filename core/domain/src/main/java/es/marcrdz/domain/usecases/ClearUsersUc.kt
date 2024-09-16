@@ -7,13 +7,13 @@ import javax.inject.Inject
 import javax.inject.Qualifier
 
 @Qualifier
-annotation class ClearItemsUseCase
+annotation class ClearUsersUseCase
 
-class ClearItemsUc @Inject constructor(
-    private val repository: DomainContract.ItemsRepository
+class ClearUsersUc @Inject constructor(
+    private val repository: DomainContract.UsersRepository
 ): UseCase<@JvmSuppressWildcards Any, @JvmSuppressWildcards Boolean> {
 
     override suspend fun invoke(param: Any?): Either<Fail, Boolean> =
-        repository.clearItems()
+        repository.clearUsers()
 
 }

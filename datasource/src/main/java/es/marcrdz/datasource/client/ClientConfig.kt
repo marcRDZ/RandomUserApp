@@ -7,7 +7,7 @@ import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
 class ClientConfig(
-    val rootUrl: HttpUrl = BuildConfig.MONDLY_BASE_URL.toHttpUrlOrNull()!!,
+    val rootUrl: HttpUrl = BuildConfig.RANDOM_USER_BASE_URL.toHttpUrlOrNull()!!,
     val okHttpConfig: OkHttpClient.Builder.() -> OkHttpClient.Builder = {
         retryOnConnectionFailure(false)
         connectTimeout(30, TimeUnit.SECONDS)

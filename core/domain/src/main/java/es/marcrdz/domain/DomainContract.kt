@@ -2,15 +2,15 @@ package es.marcrdz.domain
 
 import arrow.core.Either
 import es.marcrdz.domain.models.Fail
-import es.marcrdz.domain.models.Item
+import es.marcrdz.domain.models.User
 
 interface DomainContract {
 
-    interface ItemsRepository {
+    interface UsersRepository {
 
-        suspend fun fetchItems(): Either<Fail, List<Item>>
+        suspend fun fetchUsers(): Either<Fail, List<User>>
 
-        suspend fun clearItems(): Either<Fail, Boolean>
+        suspend fun clearUsers(): Either<Fail, Boolean>
 
     }
 }

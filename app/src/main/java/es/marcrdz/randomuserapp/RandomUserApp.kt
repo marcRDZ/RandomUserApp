@@ -1,7 +1,7 @@
-package es.marcrdz.mondlyapp
+package es.marcrdz.randomuserapp
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class MondlyApp: Application() {}
+class RandomUserApp: Application() {}

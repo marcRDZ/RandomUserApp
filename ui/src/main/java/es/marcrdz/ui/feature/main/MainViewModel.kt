@@ -13,7 +13,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     handler: MainEventHandler
 ): BaseViewModel<MainEvent, MainData>(
-    initialState = MainData(items = emptyList()),
+    initialState = MainData(users = emptyList()),
     handler = handler
 ) {
 

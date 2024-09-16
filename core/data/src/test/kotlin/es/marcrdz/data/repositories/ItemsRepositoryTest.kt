@@ -16,16 +16,16 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
-class ItemsRepositoryTest {
+class UsersRepositoryTest {
 
     @MockK
-    lateinit var cacheDataSource: DataContract.ItemDataSource.Cache
+    lateinit var cacheDataSource: DataContract.UserDataSource.Cache
 
     @MockK
-    lateinit var remoteDataSource: DataContract.ItemDataSource.Remote
+    lateinit var remoteDataSource: DataContract.UserDataSource.Remote
 
-    private val repository: DomainContract.ItemsRepository by lazy {
-        ItemsRepository(
+    private val repository: DomainContract.UsersRepository by lazy {
+        UsersRepository(
             remoteDataSource,
             cacheDataSource
         )
@@ -35,61 +35,61 @@ class ItemsRepositoryTest {
     fun setUp() = MockKAnnotations.init(this, relaxUnitFun = true)
 
     @Test
-    fun `When items are cached fetchItems returns data`() = runTest {
+    fun `When items are cached fetchUsers returns data`() = runTest {
         //given
-        coEvery { cacheDataSource.getItems() } returns Either.right(emptyList())
+        coEvery { cacheDataSource.getUsers() } returns Either.right(emptyList())
         //when
-        val result = repository.fetchItems()
+        val result = repository.fetchUsers()
         //then
         Assert.assertTrue(result.isRight())
-        coVerify { cacheDataSource.getItems() }
+        coVerify { cacheDataSource.getUsers() }
 
     }
 
     @Test
-    fun `When no items are cached, loadItems is successful, saveItem executed and fetchItems returns data`() =
+    fun `When no items are cached, loadUsers is successful, saveItem executed and fetchUsers returns data`() =
         runTest {
             //given
-            coEvery { cacheDataSource.getItems() } returns Either.left(Fail.NoData)
-            coEvery { remoteDataSource.loadItems() } returns Either.right(emptyList())
-            coEvery { cacheDataSource.saveItems(any()) } returns Either.right(true)
+            coEvery { cacheDataSource.getUsers() } returns Either.left(Fail.NoData)
+            coEvery { remoteDataSource.loadUsers() } returns Either.right(emptyList())
+            coEvery { cacheDataSource.saveUsers(any()) } returns Either.right(true)
             //when
-            val result = repository.fetchItems()
+            val result = repository.fetchUsers()
             //then
             Assert.assertTrue(result.isRight())
             coVerifySequence {
-                cacheDataSource.getItems()
-                remoteDataSource.loadItems()
-                cacheDataSource.saveItems(any())
+                cacheDataSource.getUsers()
+                remoteDataSource.loadUsers()
+                cacheDataSource.saveUsers(any())
             }
         }
 
     @Test
-    fun `When no items are cached, loadItems is unsuccessful, saveItem is not executed and fetchItems returns fail`() =
+    fun `When no items are cached, loadUsers is unsuccessful, saveItem is not executed and fetchUsers returns fail`() =
         runTest {
             //given
-            coEvery { cacheDataSource.getItems() } returns Either.left(Fail.NoData)
-            coEvery { remoteDataSource.loadItems() } returns Either.left(Fail.Network)
+            coEvery { cacheDataSource.getUsers() } returns Either.left(Fail.NoData)
+            coEvery { remoteDataSource.loadUsers() } returns Either.left(Fail.Network)
             //when
-            val result = repository.fetchItems()
+            val result = repository.fetchUsers()
             //then
             Assert.assertTrue((result as? Either.Left)?.a is Fail.Network)
             coVerifySequence {
-                cacheDataSource.getItems()
-                remoteDataSource.loadItems()
+                cacheDataSource.getUsers()
+                remoteDataSource.loadUsers()
             }
         }
 
 
     @Test
-    fun `When clearItems is executed returns data`() = runTest {
+    fun `When clearUsers is executed returns data`() = runTest {
         //given
-        coEvery { cacheDataSource.clearItems() } returns Either.right(true)
+        coEvery { cacheDataSource.clearUsers() } returns Either.right(true)
         //when
-        val result = repository.clearItems()
+        val result = repository.clearUsers()
         //then
         Assert.assertTrue(result.isRight())
-        coVerify { cacheDataSource.clearItems() }
+        coVerify { cacheDataSource.clearUsers() }
 
     }
 

@@ -2,20 +2,20 @@ package es.marcrdz.data
 
 import arrow.core.Either
 import es.marcrdz.domain.models.Fail
-import es.marcrdz.domain.models.Item
+import es.marcrdz.domain.models.User
 
 interface DataContract {
 
-    interface ItemDataSource {
+    interface UserDataSource {
 
         interface Remote {
-            suspend fun loadItems(): Either<Fail, List<Item>>
+            suspend fun loadUsers(): Either<Fail, List<User>>
         }
 
         interface Cache {
-            suspend fun getItems(): Either<Fail, List<Item>>
-            suspend fun saveItems(items: List<Item>): Either<Fail, Boolean>
-            suspend fun clearItems(): Either<Fail, Boolean>
+            suspend fun getUsers(): Either<Fail, List<User>>
+            suspend fun saveUsers(items: List<User>): Either<Fail, Boolean>
+            suspend fun clearUsers(): Either<Fail, Boolean>
         }
     }
 

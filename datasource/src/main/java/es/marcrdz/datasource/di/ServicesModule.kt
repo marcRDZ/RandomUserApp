@@ -5,14 +5,13 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import es.marcrdz.datasource.client.ClientConfig
-import es.marcrdz.datasource.services.ItemsService
-import es.marcrdz.datasource.services.ItemsServiceImpl
+import es.marcrdz.datasource.services.UsersService
+import es.marcrdz.datasource.services.UsersServiceImpl
 
 @Module
 @InstallIn(SingletonComponent::class)
 class ServicesModule {
-
     @Provides
-    fun providesItemsService(): ItemsService = ItemsServiceImpl(ClientConfig())
+    fun providesUsersService(): UsersService = UsersServiceImpl(ClientConfig())
 
 }

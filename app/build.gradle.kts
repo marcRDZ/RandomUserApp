@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "es.marcrdz.mondlyapp"
+    namespace = "es.marcrdz.randomuserapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "es.marcrdz.mondlyapp"
+        applicationId = "es.marcrdz.randomuserapp"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

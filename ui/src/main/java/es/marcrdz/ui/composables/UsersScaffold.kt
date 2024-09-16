@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MondlyScaffold(
+fun UsersScaffold(
     backgroundState: BackgroundState,
     failState: Fail?,
     modifier: Modifier = Modifier,

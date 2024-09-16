@@ -17,7 +17,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
 
-        buildConfigField("String", "MONDLY_BASE_URL", "\"https://europe-west1-mondly-workflows.cloudfunctions.net\"")
+        buildConfigField("String", "RANDOM_USER_BASE_URL", "\"https://randomuser.me\"")
 
     }
 
