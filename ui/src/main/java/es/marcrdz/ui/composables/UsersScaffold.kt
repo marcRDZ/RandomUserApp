@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.twotone.Home
+import androidx.compose.material.icons.twotone.Face
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -62,7 +62,7 @@ fun UsersScaffold(
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(
-                            imageVector = Icons.TwoTone.Home,
+                            imageVector = Icons.TwoTone.Face,
                             contentDescription = "home icon"
                         )
                         Spacer(Modifier.width(16.dp))

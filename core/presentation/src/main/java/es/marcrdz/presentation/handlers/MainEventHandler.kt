@@ -41,6 +41,9 @@ class MainEventHandlerImpl @Inject constructor(
             }
 
             MainEvent.RetryOnError -> fetchUsers()
+            is MainEvent.OnUserSelected -> flow {
+                emit(ScreenState(MainData(selectedUser = event.user)))
+            }
         }
 
     private fun fetchUsers(): Flow<UIState<MainData>> = flow {
@@ -61,8 +64,10 @@ class MainEventHandlerImpl @Inject constructor(
 sealed class MainEvent : Event {
     data object RefreshOnSwipe : MainEvent()
     data object RetryOnError : MainEvent()
+    data class OnUserSelected(val user: User?) : MainEvent()
 }
 
 data class MainData(
-    val users: List<User>
+    val users: List<User> = emptyList(),
+    val selectedUser: User? = null
 ) : Data

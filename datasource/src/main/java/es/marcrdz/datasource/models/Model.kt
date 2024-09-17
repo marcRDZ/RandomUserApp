@@ -1,7 +1,15 @@
 package es.marcrdz.datasource.models
 
 data class UserResponseDto(
-    val results: List<UserDto>?
+    val results: List<UserDto>?,
+    val info: InfoDto?
+)
+
+data class InfoDto(
+    val seed: String?,
+    val results: Int?,
+    val page: Int?,
+    val version: String?
 )
 
 data class UserDto(
@@ -45,7 +53,7 @@ data class LocationDto(
     val city: String?,
     val state: String?,
     val country: String?,
-    val postcode: Int?,
+    val postcode: String?,
     val coordinates: CoordinatesDto?,
     val timezone: TimeZoneDto?
 )

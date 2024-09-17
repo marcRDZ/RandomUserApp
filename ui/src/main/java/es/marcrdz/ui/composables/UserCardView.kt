@@ -1,10 +1,10 @@
 package es.marcrdz.ui.composables
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -26,9 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.imageLoader
-import es.marcrdz.domain.models.Attributes
 import es.marcrdz.domain.models.Coordinates
-import es.marcrdz.domain.models.Item
 import es.marcrdz.domain.models.Location
 import es.marcrdz.domain.models.Login
 import es.marcrdz.domain.models.Moment
@@ -41,7 +39,8 @@ import java.util.Date
 
 @Composable
 fun UserCardView(
-    user: User
+    user: User,
+    onClick: (User) -> Unit = {}
 ) {
     val imgLoader = LocalContext.current.imageLoader
     val randomColor: Int = android.graphics.Color.rgb(
@@ -62,14 +61,12 @@ fun UserCardView(
             .padding(
                 horizontal = 4.dp,
                 vertical = 8.dp
-            )
+            ).clickable { onClick(user) }
     ) {
 
         Row {
-
             Column(
                 modifier = Modifier
-                    .fillMaxHeight()
                     .padding(horizontal = 8.dp)
             ) {
                 Box(
@@ -79,7 +76,7 @@ fun UserCardView(
                         .height(32.dp)
                         .width(32.dp)
                         .background(Color(randomColor))
-                        .align(Alignment.End)
+                        .align(Alignment.Start)
                 ) {
                     Text(
                         text = user.nat,
@@ -105,8 +102,11 @@ fun UserCardView(
             }
 
             AsyncImage(
-                modifier = Modifier.height(128.dp),
-                model = user.picture.thumbnail,
+                modifier = Modifier
+                    .height(128.dp)
+                    .fillMaxWidth(),
+                model = user.picture.medium,
+                alignment = Alignment.CenterEnd,
                 contentScale = ContentScale.FillHeight,
                 contentDescription = "${user.login.username} photo",
                 imageLoader = imgLoader
@@ -119,7 +119,7 @@ fun UserCardView(
 
 @Composable
 @Preview(showSystemUi = true)
-fun ItemCardPreview() {
+fun UserCardPreview() {
     UserCardView(
         user = User(
             gender = "female",
@@ -136,7 +136,7 @@ fun ItemCardPreview() {
                 city = "Aura",
                 state = "South Karelia",
                 country = "Finland",
-                postcode = 49676,
+                postcode = "49676",
                 coordinates = Coordinates(
                     latitude = -23.7377,
                     longitude = 163.2147

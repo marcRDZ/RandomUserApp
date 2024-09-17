@@ -12,7 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     handler: MainEventHandler
-): BaseViewModel<MainEvent, MainData>(
+) : BaseViewModel<MainEvent, MainData>(
     initialState = MainData(users = emptyList()),
     handler = handler
 ) {
@@ -25,11 +25,17 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    override fun onEvent(event: MainEvent)  {
+    override fun onEvent(event: MainEvent) {
         viewModelScope.launch {
-            handler.handleEvent(event).collect {
-                processState(it)
+            handler.handleEvent(event).collect { newState ->
+                processState(newState) {
+                    when (event) {
+                        is MainEvent.OnUserSelected -> this.copy(selectedUser = it.selectedUser)
+                        else -> it
+                    }
+                }
             }
         }
     }
+
 }

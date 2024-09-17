@@ -1,7 +1,6 @@
 package es.marcrdz.datasource.mappers
 
 import android.util.Log
-import es.marcrdz.datasource.models.AttributesDto
 import es.marcrdz.datasource.models.CoordinatesDto
 import es.marcrdz.datasource.models.LocationDto
 import es.marcrdz.datasource.models.LoginDto
@@ -11,7 +10,6 @@ import es.marcrdz.datasource.models.PictureDto
 import es.marcrdz.datasource.models.StreetDto
 import es.marcrdz.datasource.models.TimeZoneDto
 import es.marcrdz.datasource.models.UserDto
-import es.marcrdz.domain.models.Attributes
 import es.marcrdz.domain.models.Coordinates
 import es.marcrdz.domain.models.Location
 import es.marcrdz.domain.models.Login
@@ -25,14 +23,6 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-
-val attributesDtoMapper: (AttributesDto?) -> Attributes = {
-    Attributes(
-        name = it?.name.orEmpty(),
-        description = it?.description.orEmpty(),
-        imgUrl = it?.imageInfo?.imageUrl.orEmpty()
-    )
-}
 
 val userDtoMapper: (UserDto?) -> User = {
     User(
@@ -103,7 +93,7 @@ val locationDtoMapper: (LocationDto?) -> Location = {
         city = it?.city.orEmpty(),
         state = it?.state.orEmpty(),
         country = it?.country.orEmpty(),
-        postcode = it?.postcode ?: 0,
+        postcode = it?.postcode.orEmpty(),
         coordinates = coordinatesDtoMapper(it?.coordinates),
         timezone = timeZoneDtoMapper(it?.timezone)
     )

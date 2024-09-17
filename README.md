@@ -1,6 +1,6 @@
 # Random User Assessment Project
 
-This project is based in some ideas of Clean architecture I've been developing lately on other projects like [Pokompose](https://github.com/marcRDZ/Pokompose) or [MArvelArchives](https://github.com/marcRDZ/MarvelArchives) but dealing with the endpoint provided on this assessment. By the way I've simplified or improved some things on the base classes and take advantage of the latest features of Android Studio like version catalogs and so.
+This project is based in some ideas of Clean architecture I've been developing lately on other projects like [Pokompose](https://github.com/marcRDZ/Pokompose) or [MarvelArchives](https://github.com/marcRDZ/MarvelArchives) but dealing with the endpoint provided on this assessment. By the way I've simplified or improved some things on the base classes and take advantage of the latest features of Android Studio like version catalogs and so.
 
 This diagram expose my proposal of architecture:
 

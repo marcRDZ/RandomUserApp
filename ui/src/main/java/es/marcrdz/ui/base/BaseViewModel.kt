@@ -4,7 +4,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import es.marcrdz.domain.models.Fail
 import es.marcrdz.presentation.PresentationContract
 import es.marcrdz.presentation.models.BackgroundState
@@ -13,8 +12,6 @@ import es.marcrdz.presentation.models.Event
 import es.marcrdz.presentation.models.FailState
 import es.marcrdz.presentation.models.ScreenState
 import es.marcrdz.presentation.models.UIState
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
 abstract class BaseViewModel<E : Event, D : Data>(
     initialState: D,

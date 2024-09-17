@@ -23,9 +23,11 @@ import java.util.Date
 fun UsersView(
     usersList: List<User>,
     isRefreshing: Boolean,
-    onRefresh: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onRefresh: () -> Unit = {},
+    onUserClick: (User) -> Unit = {}
 ) {
+
     PullToRefreshBox(
         isRefreshing = isRefreshing,
         onRefresh = { onRefresh() }
@@ -36,7 +38,8 @@ fun UsersView(
         ) {
             items(count = usersList.size) { index ->
                 UserCardView(
-                    user = usersList[index]
+                    user = usersList[index],
+                    onClick = onUserClick
                 )
             }
         }
@@ -46,7 +49,7 @@ fun UsersView(
 
 @Composable
 @Preview(showSystemUi = true)
-fun ItemsPreview() {
+fun UsersPreview() {
     UsersView(
         usersList = listOf(
             User(
@@ -64,7 +67,7 @@ fun ItemsPreview() {
                     city = "Aura",
                     state = "South Karelia",
                     country = "Finland",
-                    postcode = 49676,
+                    postcode = "49676",
                     coordinates = Coordinates(
                         latitude = -23.7377,
                         longitude = 163.2147
@@ -117,7 +120,7 @@ fun ItemsPreview() {
                     city = "Lyon",
                     state = "Moselle",
                     country = "France",
-                    postcode = 45512,
+                    postcode = "45512",
                     coordinates = Coordinates(
                         latitude = 63.7767,
                         longitude = 99.6751
@@ -170,7 +173,7 @@ fun ItemsPreview() {
                     city = "Frederiksberg",
                     state = "Hovedstaden",
                     country = "Denmark",
-                    postcode = 99944,
+                    postcode = "99944",
                     coordinates = Coordinates(
                         latitude = -64.5175,
                         longitude = -168.4397
@@ -209,7 +212,6 @@ fun ItemsPreview() {
                 nat = "DK"
             )
         ),
-        isRefreshing = false,
-        onRefresh = {}
+        isRefreshing = false
     )
 }

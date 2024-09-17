@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="email">Correo electrónico</string>
+    <string name="address">Dirección</string>
+    <string name="phone">Teléfono</string>
+    <string name="postal_code">Código postal</string>
+    <string name="city">Ciudad</string>
+    <string name="send_email">Enviar correo…</string>
+</resources>
