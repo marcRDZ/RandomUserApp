@@ -18,4 +18,8 @@ I gather here all the things I've been learning through my latest working experi
 - Implementation of unit tests for the core logic based on [Mockk](https://mockk.io/) and [Turbine](https://github.com/cashapp/turbine)
 - UI fully designed on [Jetpack Compose](https://developer.android.com/jetpack/compose)
 
+
+https://github.com/user-attachments/assets/e08b9bde-8791-4b84-98c5-694d89566e62
+
+
 > Written with [StackEdit](https://stackedit.io/).
