@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import es.marcrdz.domain.models.Fail
@@ -39,12 +40,13 @@ fun UsersScaffold(
 ) {
     val snackBarHostState: SnackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     failState?.let { fail ->
         coroutineScope.launch {
             val state = snackBarHostState.showSnackbar(
-                message = "Something went wrong!",
-                actionLabel = "Retry"
+                message = context.getString(R.string.something_went_wrong),
+                actionLabel = context.getString(R.string.retry)
             )
 
             state.takeIf {
