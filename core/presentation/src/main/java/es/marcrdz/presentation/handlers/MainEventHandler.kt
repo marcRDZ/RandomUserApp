@@ -27,6 +27,7 @@ class MainEventHandlerImpl @Inject constructor(
         when (event) {
 
             MainEvent.RefreshOnSwipe -> flow {
+                emit(FailState(fail = null))
                 emit(BackgroundState.Loading)
                 clearItemsUc()
                 fetchItemsUc().let {
@@ -47,6 +48,7 @@ class MainEventHandlerImpl @Inject constructor(
         }
 
     private fun fetchUsers(): Flow<UIState<MainData>> = flow {
+        emit(FailState(fail = null))
         emit(BackgroundState.Loading)
         fetchItemsUc().let {
             emit(BackgroundState.Idle)
