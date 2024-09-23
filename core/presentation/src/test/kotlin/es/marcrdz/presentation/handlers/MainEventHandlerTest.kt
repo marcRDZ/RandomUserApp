@@ -42,6 +42,7 @@ class MainEventHandlerTest {
             val result = mainEventHandler.handleInit()
             //then
             result.test {
+                Assert.assertTrue((awaitItem() as FailState).fail == null)
                 Assert.assertTrue(awaitItem() is BackgroundState.Loading)
                 Assert.assertTrue(awaitItem() is BackgroundState.Idle)
                 Assert.assertTrue(awaitItem() is ScreenState<MainData>)
@@ -59,6 +60,7 @@ class MainEventHandlerTest {
             val result = mainEventHandler.handleInit()
             //then
             result.test {
+                Assert.assertTrue((awaitItem() as FailState).fail == null)
                 Assert.assertTrue(awaitItem() is BackgroundState.Loading)
                 Assert.assertTrue(awaitItem() is BackgroundState.Idle)
                 Assert.assertTrue((awaitItem() as FailState).fail is Fail.Unknown)
@@ -76,6 +78,7 @@ class MainEventHandlerTest {
             val result = mainEventHandler.handleEvent(MainEvent.RetryOnError)
             //then
             result.test {
+                Assert.assertTrue((awaitItem() as FailState).fail == null)
                 Assert.assertTrue(awaitItem() is BackgroundState.Loading)
                 Assert.assertTrue(awaitItem() is BackgroundState.Idle)
                 Assert.assertTrue(awaitItem() is ScreenState<MainData>)
@@ -93,6 +96,7 @@ class MainEventHandlerTest {
             val result = mainEventHandler.handleEvent(MainEvent.RetryOnError)
             //then
             result.test {
+                Assert.assertTrue((awaitItem() as FailState).fail == null)
                 Assert.assertTrue(awaitItem() is BackgroundState.Loading)
                 Assert.assertTrue(awaitItem() is BackgroundState.Idle)
                 Assert.assertTrue((awaitItem() as FailState).fail is Fail.Unknown)
@@ -111,6 +115,7 @@ class MainEventHandlerTest {
             val result = mainEventHandler.handleEvent(MainEvent.RefreshOnSwipe)
             //then
             result.test {
+                Assert.assertTrue((awaitItem() as FailState).fail == null)
                 Assert.assertTrue(awaitItem() is BackgroundState.Loading)
                 Assert.assertTrue(awaitItem() is BackgroundState.Idle)
                 Assert.assertTrue(awaitItem() is ScreenState<MainData>)
@@ -132,6 +137,7 @@ class MainEventHandlerTest {
             val result = mainEventHandler.handleEvent(MainEvent.RefreshOnSwipe)
             //then
             result.test {
+                Assert.assertTrue((awaitItem() as FailState).fail == null)
                 Assert.assertTrue(awaitItem() is BackgroundState.Loading)
                 Assert.assertTrue(awaitItem() is BackgroundState.Idle)
                 Assert.assertTrue((awaitItem() as FailState).fail is Fail.Unknown)
